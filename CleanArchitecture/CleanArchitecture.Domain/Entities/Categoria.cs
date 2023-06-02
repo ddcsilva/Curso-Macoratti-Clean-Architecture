@@ -1,13 +1,13 @@
 using CleanArchitecture.Domain.Validations;
 
 namespace CleanArchitecture.Domain.Entities;
-public sealed class Categoria
+public sealed class Categoria : BaseEntity
 {
     public Categoria(int id, string nome)
     {
         DomainExceptionValidation.When(id < 0, "Id inválido");
-        Id = id;
         Validar(nome);
+        Id = id;
     }
 
     public Categoria(string nome)
@@ -15,10 +15,14 @@ public sealed class Categoria
         Validar(nome);
     }
 
-    public int Id { get; private set; }
     public string Nome { get; private set; }
 
     public ICollection<Produto> Produtos { get; set; }
+
+    public void Atualizar(string nome)
+    {
+        Validar(nome);
+    }
 
     private void Validar(string nome)
     {
