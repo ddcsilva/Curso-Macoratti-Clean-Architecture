@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CleanArchitecture.Application.DTOs.CategoriaDTO>
+
+@{
+    ViewData["Title"] = "Gerenciamento de Categorias";
+}
+
+<style>
+    .modal-lg {
+        max-width: 80% !important;
+    }
+</style>
+
+<div>
+    <h2>@ViewData["Title"]</h2>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <a asp-action="Criar" class="btn btn-primary">
+                    <span title="Novo Registro" class="fas fa-plus"></span> Novo Registro
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn btn-warning">
+                            <span class="fas fa-edit">Editar</span>
+                        </a>
+
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes" class="btn btn-primary">
+                            <span class="fas fa-search">Detalhes</span>
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Excluir" class="btn btn-danger">
+                            <span class="fas fa-trash-alt">Excluir</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
