@@ -67,4 +67,12 @@ public class ProdutoTest
             .Throw<DomainExceptionValidation>()
             .WithMessage("Caminho da imagem muito grande, máximo 250 caracteres");
     }
+
+    [Fact(DisplayName = "Criar Produto sem imagem")]
+    public void CriarProduto_SemImagem_RetornaProduto()
+    {
+        Action action = () => new Produto("Produto Teste", "Descrição Teste", 9.99m, 10, null);
+        action.Should()
+            .NotThrow<NullReferenceException>();
+    }
 }
