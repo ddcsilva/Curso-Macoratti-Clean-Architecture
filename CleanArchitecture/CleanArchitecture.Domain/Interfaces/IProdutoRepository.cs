@@ -9,7 +9,7 @@ public interface IProdutoRepository
 
     Task<Produto> ObterProdutoPorCategoriaAsync(int? categoriaId);
 
-    Task<Produto> CriarAsync(Produto produto);
+    Task<Produto> AdicionarAsync(Produto produto);
     Task<Produto> AtualizarAsync(Produto produto);
     Task<Produto> ExcluirAsync(Produto produto);
 }

@@ -29,7 +29,7 @@ public class ProdutoRepository : IProdutoRepository
         return await _context.Produtos.AsNoTracking().Include(c => c.Categoria).FirstOrDefaultAsync(p => p.CategoriaId == categoriaId);
     }
 
-    public async Task<Produto> CriarAsync(Produto produto)
+    public async Task<Produto> AdicionarAsync(Produto produto)
     {
         _context.Add(produto);
         await _context.SaveChangesAsync();
