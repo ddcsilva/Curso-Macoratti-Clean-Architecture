@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitecture.Infra.Data.Identity
+namespace CleanArchitecture.Infra.Data.Identity;
+
+public class Usuario : IdentityUser
 {
-    public class Usuario : IdentityUser
-    {
-    }
 }
