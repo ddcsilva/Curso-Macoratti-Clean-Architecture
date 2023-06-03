@@ -21,7 +21,7 @@ public class ProdutoRepository : IProdutoRepository
 
     public async Task<Produto> ObterProdutoPorIdAsync(int? id)
     {
-        return await _context.Produtos.AsNoTracking().Include(c => c.Categoria).FirstOrDefaultAsync(p => p.Id == id);
+        return await _context.Produtos.Include(c => c.Categoria).FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<Produto> AdicionarAsync(Produto produto)

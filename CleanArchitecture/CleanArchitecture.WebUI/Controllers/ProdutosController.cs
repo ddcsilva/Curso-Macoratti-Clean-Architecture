@@ -41,4 +41,40 @@ public class ProdutosController : Controller
 
         return View(produtoDTO);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Editar(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var produtoDTO = await _produtoService.ObterProdutoPorIdAsync(id);
+
+        if (produtoDTO == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Categorias = new SelectList(await _categoriaService.ObterCategoriasAsync(), "Id", "Nome");
+        return View(produtoDTO);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Editar(int id, ProdutoDTO produtoDTO)
+    {
+        if (id != produtoDTO.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            await _produtoService.AtualizarAsync(produtoDTO);
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(produtoDTO);
+    }
 }
