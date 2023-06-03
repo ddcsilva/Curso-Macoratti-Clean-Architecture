@@ -47,4 +47,31 @@ public class CategoriasController : ControllerBase
 
         return new CreatedAtRouteResult("ObterCategoria", new { id = categoriaDTO.Id }, categoriaDTO);
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult> Put(int id, [FromBody] CategoriaDTO categoriaDTO)
+    {
+        if (id != categoriaDTO.Id)
+            return BadRequest("Categoria inválida.");
+
+        if (categoriaDTO == null)
+            return BadRequest("Categoria inválida.");
+
+        await _categoriaService.AtualizarAsync(categoriaDTO);
+
+        return Ok(categoriaDTO);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<CategoriaDTO>> Delete(int id)
+    {
+        var categoria = await _categoriaService.ObterCategoriaPorIdAsync(id);
+
+        if (categoria == null)
+            return NotFound("Categoria não encontrada.");
+
+        await _categoriaService.RemoverAsync(id);
+
+        return Ok(categoria);
+    }
 }
