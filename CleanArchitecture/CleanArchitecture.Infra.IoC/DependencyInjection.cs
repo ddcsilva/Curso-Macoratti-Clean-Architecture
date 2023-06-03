@@ -36,6 +36,7 @@ public static class DependencyInjection
         services.AddScoped<ICategoriaService, CategoriaService>();
         services.AddScoped<IProdutoService, ProdutoService>();
 
+        services.AddScoped<ISeedUsuarioPapelInicial, SeedUsuarioPapelInicial>();
         services.AddScoped<IAutenticacaoUsuario, AutenticacaoUsuarioService>();
 
         services.AddAutoMapper(typeof(DomainToDTOMapping));

@@ -1,9 +1,11 @@
 using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.WebUI.Controllers;
 
+[Authorize]
 public class CategoriasController : Controller
 {
     private readonly ICategoriaService _categoriaService;

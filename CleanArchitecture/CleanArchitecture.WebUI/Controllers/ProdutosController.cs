@@ -1,5 +1,6 @@
 using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -80,6 +81,7 @@ public class ProdutosController : Controller
         return View(produtoDTO);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> Remover(int? id)
     {
