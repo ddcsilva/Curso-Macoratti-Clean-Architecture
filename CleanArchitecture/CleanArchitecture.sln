@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.WebUI", "CleanArchitecture.WebUI\CleanArchitecture.WebUI.csproj", "{FF9D3953-D061-44D8-8386-C75A155B4EE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Domain.Tests", "CleanArchitecture.Domain.Tests\CleanArchitecture.Domain.Tests.csproj", "{864C02E1-B9CB-4682-A74E-5717500024C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Domain.Tests", "CleanArchitecture.Domain.Tests\CleanArchitecture.Domain.Tests.csproj", "{864C02E1-B9CB-4682-A74E-5717500024C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Infra.IoC", "CleanArchitecture.Infra.IoC\CleanArchitecture.Infra.IoC.csproj", "{0292EC48-C738-4BCB-BCED-FD9C3083C0D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Infra.IoC", "CleanArchitecture.Infra.IoC\CleanArchitecture.Infra.IoC.csproj", "{0292EC48-C738-4BCB-BCED-FD9C3083C0D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Infra.Data", "CleanArchitecture.Infra.Data\CleanArchitecture.Infra.Data.csproj", "{CCE3097A-8D86-492B-BF10-B2044A867E6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitecture.Infra.Data", "CleanArchitecture.Infra.Data\CleanArchitecture.Infra.Data.csproj", "{CCE3097A-8D86-492B-BF10-B2044A867E6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.API", "CleanArchitecture.API\CleanArchitecture.API.csproj", "{53FFFB69-B962-4A18-8548-2B6625DE1446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{CCE3097A-8D86-492B-BF10-B2044A867E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCE3097A-8D86-492B-BF10-B2044A867E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCE3097A-8D86-492B-BF10-B2044A867E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53FFFB69-B962-4A18-8548-2B6625DE1446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FFFB69-B962-4A18-8548-2B6625DE1446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FFFB69-B962-4A18-8548-2B6625DE1446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FFFB69-B962-4A18-8548-2B6625DE1446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
