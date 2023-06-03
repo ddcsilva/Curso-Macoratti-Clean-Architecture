@@ -42,18 +42,6 @@ public class ProdutoService : IProdutoService
         return _mapper.Map<ProdutoDTO>(resultadoQuery);
     }
 
-    public async Task<ProdutoDTO> ObterProdutoPorCategoriaAsync(int? categoriaId)
-    {
-        var produtoPorIdQuery = new ObterProdutoPorIdQuery(categoriaId.Value);
-
-        if (produtoPorIdQuery == null)
-            throw new ApplicationException("Erro ao obter produto");
-
-        var resultadoQuery = await _mediator.Send(produtoPorIdQuery);
-
-        return _mapper.Map<ProdutoDTO>(resultadoQuery);
-    }
-
     public async Task AdicionarAsync(ProdutoDTO produtoDTO)
     {
         var produtoCriarCommand = _mapper.Map<ProdutoCreateCommand>(produtoDTO);

@@ -24,11 +24,6 @@ public class ProdutoRepository : IProdutoRepository
         return await _context.Produtos.AsNoTracking().Include(c => c.Categoria).FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task<Produto> ObterProdutoPorCategoriaAsync(int? categoriaId)
-    {
-        return await _context.Produtos.AsNoTracking().Include(c => c.Categoria).FirstOrDefaultAsync(p => p.CategoriaId == categoriaId);
-    }
-
     public async Task<Produto> AdicionarAsync(Produto produto)
     {
         _context.Add(produto);
