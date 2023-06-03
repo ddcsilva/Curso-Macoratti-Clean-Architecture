@@ -26,7 +26,7 @@ public class CategoriasController : ControllerBase
         return Ok(categorias);
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id:int}", Name = "ObterCategoria")]
     public async Task<ActionResult<CategoriaDTO>> Get(int id)
     {
         var categoria = await _categoriaService.ObterCategoriaPorIdAsync(id);
@@ -35,5 +35,16 @@ public class CategoriasController : ControllerBase
             return NotFound("Categoria não encontrada.");
 
         return Ok(categoria);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Post([FromBody] CategoriaDTO categoriaDTO)
+    {
+        if (categoriaDTO == null)
+            return BadRequest("Categoria inválida.");
+
+        await _categoriaService.AdicionarAsync(categoriaDTO);
+
+        return new CreatedAtRouteResult("ObterCategoria", new { id = categoriaDTO.Id }, categoriaDTO);
     }
 }
