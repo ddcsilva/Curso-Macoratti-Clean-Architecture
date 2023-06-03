@@ -9,11 +9,13 @@ public class ProdutosController : Controller
 {
     private readonly IProdutoService _produtoService;
     private readonly ICategoriaService _categoriaService;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ProdutosController(IProdutoService produtoService, ICategoriaService categoriaService)
+    public ProdutosController(IProdutoService produtoService, ICategoriaService categoriaService, IWebHostEnvironment webHostEnvironment)
     {
         _produtoService = produtoService;
         _categoriaService = categoriaService;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     [HttpGet]
@@ -101,5 +103,28 @@ public class ProdutosController : Controller
     {
         await _produtoService.RemoverAsync(id);
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Detalhes(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var produtoDTO = await _produtoService.ObterProdutoPorIdAsync(id);
+
+        if (produtoDTO == null)
+        {
+            return NotFound();
+        }
+
+        var wwwroot = _webHostEnvironment.WebRootPath;
+        var imagem = Path.Combine(wwwroot, "imagens\\", produtoDTO.Imagem);
+        var imagemExiste = System.IO.File.Exists(imagem);
+        ViewBag.ExisteImagem = imagemExiste;
+
+        return View(produtoDTO);
     }
 }
