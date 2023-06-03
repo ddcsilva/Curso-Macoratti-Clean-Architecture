@@ -5,7 +5,7 @@ namespace CleanArchitecture.Domain.Interfaces;
 public interface IProdutoRepository
 {
     Task<IEnumerable<Produto>> ObterProdutosAsync();
-    Task<Produto> ObterProdutoPorIdAsync(int id);
+    Task<Produto> ObterProdutoPorIdAsync(int? id);
 
     Task<Produto> ObterProdutoPorCategoriaAsync(int? categoriaId);
 

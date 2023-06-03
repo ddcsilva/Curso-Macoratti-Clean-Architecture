@@ -19,7 +19,7 @@ public class ProdutoRepository : IProdutoRepository
         return await _context.Produtos.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Produto> ObterProdutoPorIdAsync(int id)
+    public async Task<Produto> ObterProdutoPorIdAsync(int? id)
     {
         return await _context.Produtos.AsNoTracking().Include(c => c.Categoria).FirstOrDefaultAsync(p => p.Id == id);
     }
