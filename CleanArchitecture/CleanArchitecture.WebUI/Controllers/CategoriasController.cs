@@ -75,4 +75,35 @@ public class CategoriasController : Controller
 
         return View(categoriaDTO);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Remover(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var categoriaDTO = await _categoriaService.ObterCategoriaPorIdAsync(id.Value);
+
+        if (categoriaDTO == null)
+        {
+            return NotFound();
+        }
+
+        return View(categoriaDTO);
+    }
+
+    [HttpPost, ActionName("Remover")]
+    public async Task<IActionResult> ConfirmarRemocao(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        await _categoriaService.RemoverAsync(id.Value);
+
+        return RedirectToAction(nameof(Index));
+    }
 }
