@@ -1,7 +1,6 @@
-namespace CleanArchitecture.Domain.Entities
+namespace CleanArchitecture.Domain.Entities;
+
+public abstract class BaseEntity
 {
-    public abstract class BaseEntity
-    {
-        public int Id { get; protected set; }
-    }
+    public int Id { get; protected set; }
 }

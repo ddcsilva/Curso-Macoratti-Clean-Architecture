@@ -1,6 +1,7 @@
 using CleanArchitecture.Domain.Validations;
 
 namespace CleanArchitecture.Domain.Entities;
+
 public sealed class Categoria : BaseEntity
 {
     public Categoria(int id, string nome)
