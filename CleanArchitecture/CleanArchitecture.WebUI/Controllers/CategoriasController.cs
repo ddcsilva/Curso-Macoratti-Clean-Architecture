@@ -106,4 +106,22 @@ public class CategoriasController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Detalhes(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var categoriaDTO = await _categoriaService.ObterCategoriaPorIdAsync(id.Value);
+
+        if (categoriaDTO == null)
+        {
+            return NotFound();
+        }
+
+        return View(categoriaDTO);
+    }
 }
