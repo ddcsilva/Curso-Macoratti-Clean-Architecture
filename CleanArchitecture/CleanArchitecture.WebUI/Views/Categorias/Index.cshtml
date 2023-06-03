@@ -44,15 +44,15 @@
                         @Html.DisplayFor(modelItem => item.Nome)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn btn-warning">
+                        <a asp-action="Editar" asp-route-id="@item.Id" title="Editar" class="btn btn-warning">
                             <span class="fas fa-edit">Editar</span>
                         </a>
 
-                        <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes" class="btn btn-primary">
+                        <a asp-action="Detahes" asp-route-id="@item.Id" title="Detalhes" class="btn btn-primary">
                             <span class="fas fa-search">Detalhes</span>
                         </a>
 
-                        <a asp-action="Delete" asp-route-id="@item.Id" title="Excluir" class="btn btn-danger">
+                        <a asp-action="Remover" asp-route-id="@item.Id" title="Excluir" class="btn btn-danger">
                             <span class="fas fa-trash-alt">Excluir</span>
                         </a>
                     </td>

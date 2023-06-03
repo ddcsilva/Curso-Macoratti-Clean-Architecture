@@ -37,4 +37,42 @@ public class CategoriasController : Controller
 
         return View(categoriaDTO);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Editar(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var categoriaDTO = await _categoriaService.ObterCategoriaPorIdAsync(id.Value);
+
+        if (categoriaDTO == null)
+        {
+            return NotFound();
+        }
+
+        return View(categoriaDTO);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Editar(CategoriaDTO categoriaDTO)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                await _categoriaService.AtualizarAsync(categoriaDTO);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(categoriaDTO);
+    }
 }
