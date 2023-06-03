@@ -77,4 +77,29 @@ public class ProdutosController : Controller
 
         return View(produtoDTO);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Remover(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var produtoDTO = await _produtoService.ObterProdutoPorIdAsync(id);
+
+        if (produtoDTO == null)
+        {
+            return NotFound();
+        }
+
+        return View(produtoDTO);
+    }
+
+    [HttpPost, ActionName("Remover")]
+    public async Task<IActionResult> ConfirmarRemocao(int id)
+    {
+        await _produtoService.RemoverAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
 }
