@@ -20,9 +20,14 @@ public static class DependencyInjection
 
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
         services.AddScoped<ICategoriaService, CategoriaService>();
         services.AddScoped<IProdutoService, ProdutoService>();
+
         services.AddAutoMapper(typeof(DomainToDTOMapping));
+
+        var handlers = AppDomain.CurrentDomain.Load("CleanArchitecture.Application");
+        services.AddMediatR(config => config.RegisterServicesFromAssemblies(handlers));
 
         return services;
     }
