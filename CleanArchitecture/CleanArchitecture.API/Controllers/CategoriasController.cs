@@ -26,4 +26,14 @@ public class CategoriasController : ControllerBase
         return Ok(categorias);
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<CategoriaDTO>> Get(int id)
+    {
+        var categoria = await _categoriaService.ObterCategoriaPorIdAsync(id);
+
+        if (categoria == null)
+            return NotFound("Categoria não encontrada.");
+
+        return Ok(categoria);
+    }
 }
