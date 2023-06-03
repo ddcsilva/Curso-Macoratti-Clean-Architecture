@@ -1,9 +1,8 @@
 using AutoMapper;
 using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Produtos.Commands;
 using CleanArchitecture.Application.Produtos.Queries;
-using CleanArchitecture.Domain.Entities;
-using CleanArchitecture.Domain.Interfaces;
 using MediatR;
 
 namespace CleanArchitecture.Application.Services;
@@ -31,33 +30,49 @@ public class ProdutoService : IProdutoService
         return _mapper.Map<IEnumerable<ProdutoDTO>>(resultadoQuery);
     }
 
-    // public async Task<ProdutoDTO> ObterProdutoPorIdAsync(int? id)
-    // {
-    //     var produto = await _produtoRepository.ObterProdutoPorIdAsync(id);
-    //     return _mapper.Map<ProdutoDTO>(produto);
-    // }
+    public async Task<ProdutoDTO> ObterProdutoPorIdAsync(int? id)
+    {
+        var produtoPorIdQuery = new ObterProdutoPorIdQuery(id.Value);
 
-    // public async Task<ProdutoDTO> ObterProdutoPorCategoriaAsync(int? categoriaId)
-    // {
-    //     var produto = await _produtoRepository.ObterProdutoPorCategoriaAsync(categoriaId);
-    //     return _mapper.Map<ProdutoDTO>(produto);
-    // }
+        if (produtoPorIdQuery == null)
+            throw new ApplicationException("Erro ao obter produto");
 
-    // public async Task AdicionarAsync(ProdutoDTO produtoDTO)
-    // {
-    //     var produto = _mapper.Map<Produto>(produtoDTO);
-    //     await _produtoRepository.AdicionarAsync(produto);
-    // }
+        var resultadoQuery = await _mediator.Send(produtoPorIdQuery);
 
-    // public async Task AtualizarAsync(ProdutoDTO produtoDTO)
-    // {
-    //     var produto = _mapper.Map<Produto>(produtoDTO);
-    //     await _produtoRepository.AtualizarAsync(produto);
-    // }
+        return _mapper.Map<ProdutoDTO>(resultadoQuery);
+    }
 
-    // public async Task RemoverAsync(int? id)
-    // {
-    //     var produto = _produtoRepository.ObterProdutoPorIdAsync(id).Result;
-    //     await _produtoRepository.ExcluirAsync(produto);
-    // }
+    public async Task<ProdutoDTO> ObterProdutoPorCategoriaAsync(int? categoriaId)
+    {
+        var produtoPorIdQuery = new ObterProdutoPorIdQuery(categoriaId.Value);
+
+        if (produtoPorIdQuery == null)
+            throw new ApplicationException("Erro ao obter produto");
+
+        var resultadoQuery = await _mediator.Send(produtoPorIdQuery);
+
+        return _mapper.Map<ProdutoDTO>(resultadoQuery);
+    }
+
+    public async Task AdicionarAsync(ProdutoDTO produtoDTO)
+    {
+        var produtoCriarCommand = _mapper.Map<ProdutoCreateCommand>(produtoDTO);
+        await _mediator.Send(produtoCriarCommand);
+    }
+
+    public async Task AtualizarAsync(ProdutoDTO produtoDTO)
+    {
+        var produtoUpdateCommand = _mapper.Map<ProdutoUpdateCommand>(produtoDTO);
+        await _mediator.Send(produtoUpdateCommand);
+    }
+
+    public async Task RemoverAsync(int? id)
+    {
+        var produtoRemoveCommand = new ProdutoRemoveCommand(id.Value);
+
+        if (produtoRemoveCommand == null)
+            throw new ApplicationException("Erro ao remover produto");
+
+        await _mediator.Send(produtoRemoveCommand);
+    }
 }
