@@ -1,9 +1,12 @@
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Mappings;
 using CleanArchitecture.Application.Services;
+using CleanArchitecture.Domain.Account;
 using CleanArchitecture.Domain.Interfaces;
 using CleanArchitecture.Infra.Data.Context;
+using CleanArchitecture.Infra.Data.Identity;
 using CleanArchitecture.Infra.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,11 +21,22 @@ public static class DependencyInjection
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
+        services.AddIdentity<Usuario, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.LoginPath = "/Conta/Login";
+        });
+
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
         services.AddScoped<ICategoriaService, CategoriaService>();
         services.AddScoped<IProdutoService, ProdutoService>();
+
+        services.AddScoped<IAutenticacaoUsuario, AutenticacaoUsuarioService>();
 
         services.AddAutoMapper(typeof(DomainToDTOMapping));
 
