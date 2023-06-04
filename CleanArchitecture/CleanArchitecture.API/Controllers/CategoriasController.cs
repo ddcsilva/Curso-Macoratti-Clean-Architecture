@@ -2,7 +2,7 @@ using CleanArchitecture.Application.DTOs;
 using CleanArchitecture.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleanArchitecture.API;
+namespace CleanArchitecture.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
