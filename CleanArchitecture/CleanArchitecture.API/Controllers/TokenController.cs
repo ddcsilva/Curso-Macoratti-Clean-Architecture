@@ -21,7 +21,23 @@ public class TokenController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpPost("login")]
+    [HttpPost("Registro")]
+    public async Task<ActionResult> Registro([FromBody] LoginModel loginModel)
+    {
+        var resultadoAutenticacao = await _autenticacaoUsuario.AutenticarAsync(loginModel.Email, loginModel.Senha);
+
+        if (resultadoAutenticacao)
+        {
+            return Ok($"Usuário {loginModel.Email} registrado com sucesso.");
+        }
+        else
+        {
+            ModelState.AddModelError(string.Empty, "Login inválido.");
+            return BadRequest(ModelState);
+        }
+    }
+
+    [HttpPost("Login")]
     public async Task<ActionResult<UsuarioToken>> Login([FromBody] LoginModel loginModel)
     {
         var resultadoAutenticacao = await _autenticacaoUsuario.AutenticarAsync(loginModel.Email, loginModel.Senha);
